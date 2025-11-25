@@ -1,0 +1,6 @@
+@echo off
+echo Starting Local Server for 3D Environment...
+echo Please wait, opening browser...
+start http://localhost:8000
+python -m http.server 8000
+pause
