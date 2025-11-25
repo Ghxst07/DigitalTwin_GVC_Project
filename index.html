@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3D Environment - GVC Project</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    
+    <style>
+     
+        #ui-layer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 14px;
+            z-index: 999;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+       
+        .a-enter-vr-button { display: none; }
+    </style>
+  </head>
+  
+  <body>
+    <a-scene renderer="antialias: true; colorManagement: true; highRefreshRate: true;">
+      
+      <a-assets>
+        <img id="sky-texture" src="./final_panorama.png">
+      </a-assets>
+
+      <a-sky 
+        src="#sky-texture" 
+        rotation="0 -90 0"
+        animation="property: rotation; to: 0 270 0; loop: true; dur: 114000; easing: linear">
+      </a-sky>
+
+      <a-entity camera look-controls="reverseMouseDrag: true" position="0 1.6 0"></a-entity>
+
+    </a-scene>
+
+    <div id="ui-layer">
+      <strong>3D Stitched Environment</strong> <br> 
+      <span style="font-size:12px; opacity:0.8">Drag to look around... Project by ARINDOL SARKAR</span>
+    </div>
+
+    <script>
+      window.addEventListener('load', () => {
+        const sky = document.querySelector('a-sky');
+        if (!sky) return;
+        sky.addEventListener('materialtextureloaded', () => console.log('Texture Success'));
+        sky.addEventListener('materialtextureerror', (e) => console.error('Texture Failed', e));
+      });
+    </script>
+  </body>
+</html>
